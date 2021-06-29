@@ -1,5 +1,6 @@
 import axios from "axios";
 import CardComponent from "./component/CardComponent";
+import InfoComponent from "./component/InfoComponent";
 
 function App() {
   const url = 'https://swapi.dev/api/';
