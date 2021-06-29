@@ -1,20 +1,21 @@
 import axios from "axios";
+import CardComponent from "./component/CardComponent";
 
 function App() {
   const url = 'https://swapi.dev/api/';
   const getAllPeople = () => {
-    axios.get(`${url}people/1`)
+    axios.get(`${url}people`)
       .then((response) => {
         const allPeople = response.data
-        console.log(allPeople);
+        // console.log(allPeople);
       })
       .catch(error => console.error(`Error: ${error}`))
   }
-  getAllPeople();
+  // getAllPeople();
 
   return (
     <div className="App">
-      <p>hello world</p>
+      <CardComponent></CardComponent>
     </div>
   );
 }
