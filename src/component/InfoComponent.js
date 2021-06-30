@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const InfoDiv = styled.div`
+    /* border: 1px solid red; */
     display: grid;
     grid-auto-flow: column;  
     font-size: 10px;
@@ -10,7 +11,7 @@ const InfoDiv = styled.div`
     border-radius: 4px; 
     margin-bottom: 8px;
     height: 32px;
-    width: 184px;
+    /* width: 184px; */
     border-radius: 4px;
     padding:0 8px;
     justify-content: space-between;

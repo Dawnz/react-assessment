@@ -2,20 +2,32 @@ import axios from "axios";
 import CardComponent from "./component/CardComponent";
 import InfoComponent from "./component/InfoComponent";
 import useFetch from "./services/useFetch";
+import AllCardsCOmponent from "./component/AllCardsComponent";
+import CardDetailsComponent from "./component/CardDetailsComponent";
+import { fetchURL } from "./utilities/fetchUrl";
+import { useEffect } from "react";
 
 function App() {
   const url = 'https://swapi.dev/api/';
-  const [response, loading, hasError] = useFetch(url + 'people');
-  console.log(response);
-  const data = hasError ? hasError : response
-  const count = data ? data.count : null;
-  console.log(count);
-  // const { count: peopleCount } = response ? response : null;
-  // console.log(peopleCount);
-  // console.log(response, loading, hasError);
+  // const urls = [
+  //   'https://swapi.dev/api/people/1',
+  //   'https://swapi.dev/api/people/2',
+  //   'https://swapi.dev/api/people/3',
+  //   'https://swapi.dev/api/people/4'
+  // ];
+  //9 pages in total
+  const [response, loading, hasError] = useFetch(url + `people/1`)
+  // useFetch(url + "people", { params: { page: 3 } });
+  const data = loading ? loading : hasError ? hasError : response
+
+  // useEffect(() => {
+  //   fetchURL(urls)
+  // }, [])
   return (
     <div className="App">
-      {/* <CardComponent></CardComponent> */}
+      <CardDetailsComponent cardInfo={data} />
+      {/* <AllCardsCOmponent cardInfo={data} /> */}
+      {/* <CardComponent cardInfo={data}></CardComponent> */}
       <>
         {/* {loading ? <div>Loading...</div> : (hasError ? <div>Error occured.</div> : (response.map(data => <div>{data}</div>)))} */}
       </>

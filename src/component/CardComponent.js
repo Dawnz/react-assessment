@@ -13,7 +13,7 @@ width: 216px;
 border-radius: 8px;
 margin: 0px 24px;
 align-self: stretch;
-border: 1px solid red;
+/* border: 1px solid red; */
 
 .header{
     background: #969696;
@@ -42,6 +42,7 @@ border: 1px solid red;
     width:11px;
 }
 .card{
+    /* border: 1px solid red; */
     display: grid;
     grid-auto-flow: column;
     font-size: 10px;
@@ -91,7 +92,8 @@ border: 1px solid red;
 
 `;
 
-export default function CardComponent() {
+export default function CardComponent({ cardInfo }) {
+    console.log(cardInfo);
     return <CardDiv>
         <div className="header">
             <img className="header-image" src={Card} alt="CardIcon"></img>
