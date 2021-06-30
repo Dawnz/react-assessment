@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import HomeWorld from "../Interview Assets/Homeworld.svg"
 
 const InfoDiv = styled.div`
     display: grid;
