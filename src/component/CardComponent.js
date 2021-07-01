@@ -6,7 +6,7 @@ import Starship from "../Interview Assets/Starship.svg"
 import Vehicle from "../Interview Assets/Vehicle.svg"
 import Female from "../Interview Assets/Gender-Female.svg"
 import Male from "../Interview Assets/Gender-Male.svg"
-
+import useFetch from "../services/useFetch"
 const CardDiv = styled.div`
 height: 282px;
 width: 216px;
@@ -27,7 +27,7 @@ align-self: stretch;
     position: absolute;
     line-height: 24px;
     height: 24px;
-    width: 64px;
+    /* width: 64px; */
     top: 64px;
     left: 16px;
     margin-top: 0;
@@ -93,24 +93,41 @@ align-self: stretch;
 `;
 
 export default function CardComponent({ cardInfo }) {
-    console.log(cardInfo);
-    return <CardDiv>
-        <div className="header">
-            <img className="header-image" src={Card} alt="CardIcon"></img>
-            <h2 className="header-text">Name</h2>
-        </div>
-        <div className="card-container">
-            <div className="species gender">
-                <div className="inner-species heading">
-                    <img src={Male} alt="Male"></img>
-                    <h3 className="heading-content gender-info">19BBYY</h3>
-                </div>
-                <h3 className="heading-content">Species</h3></div>
-            {/* underline   */}
+    // const [cardInfoResponse, cardInfoLoading, cardInfoHasError] = useFetch(cardData || null);
+    // const cardInfo = cardInfoResponse ? cardInfoResponse : null;
 
-            <InfoComponent image={HomeWorld} title="HOMEWORLD" value="Planet" />
-            <InfoComponent image={Vehicle} title="VEHICLE" value='0' />
-            <InfoComponent image={Starship} title="STARSHIP" value='0' />
-        </div>
-    </CardDiv>
+    const [homeworldResponse, homeworldLoading, homeworldHasError] = useFetch(cardInfo ? cardInfo.homeworld : null);
+    const homeworld = homeworldResponse ? homeworldResponse.name : null;
+
+    const [speciesResponse, speciesLoading, speciesHasError] = useFetch(cardInfo ? cardInfo.species : null);
+    const species = speciesResponse ? speciesResponse.name : null;
+
+
+
+    // console.log(cardInfo);
+    return <>{cardInfo != null &&
+        <CardDiv>
+            <div className="header">
+                <img className="header-image" src={Card} alt="CardIcon"></img>
+                <h2 className="header-text">{cardInfo ? cardInfo.name : null}</h2>
+            </div>
+            <div className="card-container">
+                <div className="species gender">
+                    <div className="inner-species heading">
+                        {cardInfo?.gender === "n/a" ? null :
+                            <img src={cardInfo?.gender === "female" ? Female : Male} alt="Male"></img>
+                        }
+                        <h3 className="heading-content gender-info">{cardInfo?.birth_year}</h3>
+                    </div>
+                    <h3 className="heading-content">{cardInfo ? cardInfo.species?.length ? species : `Human` : null}</h3></div>
+                {/* underline   */}
+
+                <InfoComponent image={HomeWorld} title="HOMEWORLD" value={homeworld ? homeworld : null} />
+                <InfoComponent image={Vehicle} title="VEHICLES" value={cardInfo?.vehicles?.length} />
+                <InfoComponent image={Starship} title="STARSHIPS" value={cardInfo?.starships?.length} />
+            </div>
+
+        </CardDiv>
+    }
+    </>
 }

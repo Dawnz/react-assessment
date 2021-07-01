@@ -99,6 +99,9 @@ export default function CardDetailsComponent({ cardInfo }) {
     //to get homeworld values
     const [homeworldResponse, homeworldLoading, homeworldHasError] = useFetch(cardInfo ? cardInfo.homeworld : null);
     const homeworld = homeworldResponse ? homeworldResponse.name : null;
+
+    const [speciesResponse, speciesLoading, speciesHasError] = useFetch(cardInfo ? cardInfo.species : null);
+    const species = speciesResponse ? speciesResponse.name : null;
     // console.log(homeworld);
     // console.log(cardInfo);
 
@@ -115,7 +118,7 @@ export default function CardDetailsComponent({ cardInfo }) {
     // allVehicles();
     // console.log(allVehicles);
 
-    const [userInfo, setUserInfo] = useState({ vehicles: null, starships: null });
+    const [userInfo, setUserInfo] = useState({ vehicles: null, starships: null, });
 
     // const [vehicleInfo, setVehicleInfo] = useState();
 
@@ -148,9 +151,7 @@ export default function CardDetailsComponent({ cardInfo }) {
         getData();
 
     }, [cardInfo])
-    // const [vehicleName]=vehicleInfo?
-    console.log(userInfo);
-    // console.log(vehicleInfo || null)
+
 
 
 
@@ -162,10 +163,12 @@ export default function CardDetailsComponent({ cardInfo }) {
         <div className="card-container">
             <div className="species gender">
                 <div className="inner-species heading">
-                    <img src={cardInfo ? cardInfo.gender === 'male' ? Male : Female : null} alt="Male"></img>
-                    <h3 className="heading-content gender-info">19BBYY</h3>
+                    {cardInfo?.gender === "n/a" ? null :
+                        <img src={cardInfo?.gender === "female" ? Female : Male} alt="Male"></img>
+                    }
+                    <h3 className="heading-content gender-info">{cardInfo?.birth_year}</h3>
                 </div>
-                <h3 className="heading-content">{cardInfo ? cardInfo.species?.length ? cardInfo.species : `Human` : null}</h3></div>
+                <h3 className="heading-content">{cardInfo ? cardInfo.species?.length ? species : `Human` : null}</h3></div>
             {/* underline   */}
 
             <InfoComponent image={HomeWorld} title="HOMEWORLD" value={homeworld ? homeworld : null} />
