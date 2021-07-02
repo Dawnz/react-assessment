@@ -2,7 +2,7 @@ import axios from "axios";
 import CardComponent from "./component/CardComponent";
 import InfoComponent from "./component/InfoComponent";
 import useFetch from "./services/useFetch";
-import AllCardsCOmponent from "./component/AllCardsComponent";
+import AllCardsComponent from "./component/AllCardsComponent";
 import CardDetailsComponent from "./component/CardDetailsComponent";
 import { fetchURL } from "./utilities/fetchUrl";
 import { useEffect, useState } from "react";
@@ -14,13 +14,14 @@ function App() {
   const allCardsUrl = url + 'people'
 
   const [results, setResults] = useState(null);
-
+  const [searchResults, setSearchResults] = useState([]);
+  const [selected, setSelected] = useState(null);
 
   useEffect(() => {
     const getUsers = async function (pageNo = 1) {
 
-      let actualUrl = allCardsUrl + `?page=${pageNo}`;
-      var apiResults = await axios.get(actualUrl)
+      const actualUrl = allCardsUrl + `?page=${pageNo}`;
+      const apiResults = await axios.get(actualUrl)
         .then(resp => {
           return resp.data;
         });
@@ -30,33 +31,36 @@ function App() {
     }
     const getEntireUserList = async function (pageNo = 1) {
       const results = await getUsers(pageNo);
-      const [...value] = results.results
-      console.log("Retreiving data from API for page : " + pageNo);
+      const [...value] = results.results.flat()
+      // console.log("Retreiving data from API for page : " + pageNo);
 
       if (results.next !== null) {
         setResults(prev => {
 
-          return prev ? [...prev, value] : [value]
+          return prev ? [...prev, ...value] : [...value]
         })
         // console.log(results.next);
         return results + await getEntireUserList(pageNo + 1);
       } else {
         setResults(prev => {
-          return prev ? [...prev, value] : [value]
+          return prev ? [...prev, ...value] : [...value]
         })
         return results;
       }
     };
     getEntireUserList()
-  }, [])
+  }, [setResults])
 
-  const allData = results?.flat(1)
+  const [catData] = useFetch(url);
+  const categories = catData ? Object.keys(catData) : null
+  // const categories = results?.[0]?.map((entries) => Object.keys(entries))
+  console.log(categories);
   return (
     <div className="App">
-      {/* <SortComponent></SortComponent> */}
-      {/* <CardDetailsComponent cardInfo={data} /> */}
-      {/* <SearchComponent /> */}
-      <AllCardsCOmponent cardsData={allData} />
+      <SortComponent content={setResults} fields={categories} setSelected={setSelected}></SortComponent>
+      {/* <CardDetailsComponent cardInfo={results } /> */}
+      {/* <SearchComponent content={setResults} selected={selected} /> */}
+      {/* <AllCardsComponent cardsData={results} /> */}
 
       {/* <CardComponent cardInfo={data}></CardComponent> */}
       <>

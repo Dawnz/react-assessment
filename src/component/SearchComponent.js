@@ -1,5 +1,7 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import useFetch from '../services/useFetch';
 
 const SearchDiv = styled.div`
 /* height: 32px; */
@@ -29,36 +31,38 @@ label::before {
 } */
 `;
 
-export default function SearchComponent({
-    content,
-    filterName,
-    placeholder,
-    setSearchResults,
-    selected,
-}) {
-    const [searchTerm, setSearchTerm] = useState('');
-    //   console.log(content);
+export default function SearchComponent({ content, selected }) {
+    // const [url, setUrl] = useState
+    const url = "https://swapi.dev/api/people"
+    const [searchResults, setSearchResults] = useState()
+    const [searchTerm, setSearchTerm] = useState('')
+
     const handleChange = (event) => {
         setSearchTerm(event.target.value);
     };
-    // useEffect(() => {
 
-    //     const results = content.filter((cont) =>
-    //         cont[selected].toLowerCase().includes(searchTerm)
-    //     );
-    //     console.log(selected);
-    //     setSearchResults(results);
-    // }, [searchTerm]);
-    //   console.log(content, filterName);
+    useEffect(() => {
+        const getSearch = async function () {
+            const results = await axios.get(url, { params: { search: searchTerm } })
+                .then((res) => res.data)
+                .then((res) => {
+                    return res
+                    // console.log(res);
+
+                })
+            content(results?.results);
+        }
+        getSearch()
+
+    }, [searchTerm]);
+    console.log(searchResults);
     return (
         <SearchDiv>
             <label>
                 <input
                     className="input-field"
                     name="SearchBar"
-                    placeholder={placeholder}
                     onChange={handleChange}
-
                 />
             </label>
         </SearchDiv>
