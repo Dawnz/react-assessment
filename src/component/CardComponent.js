@@ -119,7 +119,7 @@ export default function CardComponent({ cardInfo }) {
                         }
                         <h3 className="heading-content gender-info">{cardInfo?.birth_year}</h3>
                     </div>
-                    <h3 className="heading-content">{cardInfo?.species || null}</h3></div>
+                    <h3 className="heading-content">{cardInfo?.species?.length > 0 ? cardInfo?.species : "Human" || null}</h3></div>
                 {/* underline   */}
 
                 <InfoComponent image={HomeWorld} title="HOMEWORLD" value={cardInfo?.homeworld || null} />

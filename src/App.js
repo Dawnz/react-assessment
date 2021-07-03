@@ -31,7 +31,9 @@ function App() {
       const actualUrl = allCardsUrl + `?page=${pageNo}`;
       const apiResults = await axios.get(actualUrl)
         .then(resp => {
+
           return resp.data
+
         })
         ;
       return apiResults;
@@ -43,17 +45,18 @@ function App() {
         mod.results?.map(async result => {
           const homeworld = await axios.get(result.homeworld).then(res => res.data.name);
           const species = await axios.get(result.species).then(res => res.data.name);
+          const input = ({ ...result, ...{ homeworld: homeworld, species: species } });
+          // console.log(input);
+          setMasterData(prev => {
 
+            // console.log(responseData, allResponses);
+            return (prev ? [...prev, input] : [input])
+          });
           return { ...result, ...{ homeworld: homeworld, species: species } }
         })
       ).then((allResponses) => {
-        setMasterData(prev => {
-          const responseData = allResponses?.map(res => res
-          )
-          console.log(responseData);
-          return prev ? [...prev, ...responseData] : [...responseData]
-        });
-        console.log(allResponses);
+
+        // console.log(allResponses);
       })
       return mod
     }
@@ -109,9 +112,9 @@ function App() {
         <Route exact from="/Details" render={props => <CardDetailsComponent cardInfo={results?.[0]} {...props} />} />
 
       </Switch> */}
-      <SortComponent content={setResults} fields={categories} setSelected={setSelected}></SortComponent>
+      {/* <SortComponent content={setResults} fields={categories} setSelected={setSelected}></SortComponent> */}
       {/* <CardDetailsComponent cardInfo={results } /> */}
-      <SearchComponent content={setMasterData} selected={selected} />
+      {/* <SearchComponent content={setResults} selected={selected} /> */}
       <AllCardsComponent cardsData={masterData} />
 
       {/* <CardComponent cardInfo={data}></CardComponent> */}
