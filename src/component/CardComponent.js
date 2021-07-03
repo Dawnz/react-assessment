@@ -98,10 +98,10 @@ export default function CardComponent({ cardInfo }) {
 
     const [homeworldResponse, homeworldLoading, homeworldHasError] = useFetch(cardInfo ? cardInfo.homeworld : null);
     const homeworld = homeworldResponse ? homeworldResponse.name : null;
-
+    // console.log(homeworld);
     const [speciesResponse, speciesLoading, speciesHasError] = useFetch(cardInfo ? cardInfo.species : null);
     const species = speciesResponse ? speciesResponse.name : null;
-
+    // console.log(species);
 
 
     // console.log(cardInfo);

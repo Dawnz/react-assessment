@@ -55,7 +55,7 @@ export default function SearchComponent({ content, selected }) {
         getSearch()
 
     }, [searchTerm]);
-    console.log(searchResults);
+    // console.log(searchResults);
     return (
         <SearchDiv>
             <label>
