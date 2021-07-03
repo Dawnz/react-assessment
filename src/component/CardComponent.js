@@ -96,11 +96,11 @@ export default function CardComponent({ cardInfo }) {
     // const [cardInfoResponse, cardInfoLoading, cardInfoHasError] = useFetch(cardData || null);
     // const cardInfo = cardInfoResponse ? cardInfoResponse : null;
 
-    const [homeworldResponse, homeworldLoading, homeworldHasError] = useFetch(cardInfo ? cardInfo.homeworld : null);
-    const homeworld = homeworldResponse ? homeworldResponse.name : null;
-    // console.log(homeworld);
-    const [speciesResponse, speciesLoading, speciesHasError] = useFetch(cardInfo ? cardInfo.species : null);
-    const species = speciesResponse ? speciesResponse.name : null;
+    // const [homeworldResponse, homeworldLoading, homeworldHasError] = useFetch(cardInfo ? cardInfo.homeworld : null);
+    // const homeworld = homeworldResponse ? homeworldResponse.name : null;
+    // // console.log(homeworld);
+    // const [speciesResponse, speciesLoading, speciesHasError] = useFetch(cardInfo ? cardInfo.species : null);
+    // const species = speciesResponse ? speciesResponse.name : null;
     // console.log(species);
 
 
@@ -119,10 +119,10 @@ export default function CardComponent({ cardInfo }) {
                         }
                         <h3 className="heading-content gender-info">{cardInfo?.birth_year}</h3>
                     </div>
-                    <h3 className="heading-content">{cardInfo ? cardInfo.species?.length ? species : `Human` : null}</h3></div>
+                    <h3 className="heading-content">{cardInfo?.species || null}</h3></div>
                 {/* underline   */}
 
-                <InfoComponent image={HomeWorld} title="HOMEWORLD" value={homeworld ? homeworld : null} />
+                <InfoComponent image={HomeWorld} title="HOMEWORLD" value={cardInfo?.homeworld || null} />
                 <InfoComponent image={Vehicle} title="VEHICLES" value={cardInfo?.vehicles?.length} />
                 <InfoComponent image={Starship} title="STARSHIPS" value={cardInfo?.starships?.length} />
             </div>

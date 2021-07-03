@@ -8,7 +8,7 @@ display: grid;
 grid-auto-flow: column;
 
 `;
-export default function AllCardsCOmponent({ cardsData }) {
+export default function AllCardsComponent({ cardsData }) {
     // const allCardsUrl = cardsData + 'people'
 
     // const [results, setResults] = useState(null);

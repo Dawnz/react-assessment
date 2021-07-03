@@ -97,11 +97,11 @@ align-self: stretch;
 
 export default function CardDetailsComponent({ cardInfo }) {
     //to get homeworld values
-    const [homeworldResponse, homeworldLoading, homeworldHasError] = useFetch(cardInfo ? cardInfo.homeworld : null);
-    const homeworld = homeworldResponse ? homeworldResponse.name : null;
+    // const [homeworldResponse, homeworldLoading, homeworldHasError] = useFetch(cardInfo ? cardInfo.homeworld : null);
+    // const homeworld = homeworldResponse ? homeworldResponse.name : null;
 
-    const [speciesResponse, speciesLoading, speciesHasError] = useFetch(cardInfo ? cardInfo.species : null);
-    const species = speciesResponse ? speciesResponse.name : null;
+    // const [speciesResponse, speciesLoading, speciesHasError] = useFetch(cardInfo ? cardInfo.species : null);
+    // const species = speciesResponse ? speciesResponse.name : null;
     // console.log(homeworld);
     // console.log(cardInfo);
 
@@ -168,10 +168,10 @@ export default function CardDetailsComponent({ cardInfo }) {
                     }
                     <h3 className="heading-content gender-info">{cardInfo?.birth_year}</h3>
                 </div>
-                <h3 className="heading-content">{cardInfo ? cardInfo.species?.length ? species : `Human` : null}</h3></div>
+                <h3 className="heading-content">{cardInfo ? cardInfo.species ? cardInfo.species : `Human` : null}</h3></div>
             {/* underline   */}
 
-            <InfoComponent image={HomeWorld} title="HOMEWORLD" value={homeworld ? homeworld : null} />
+            <InfoComponent image={HomeWorld} title="HOMEWORLD" value={cardInfo?.homeworld || null} />
             {userInfo?.vehicles?.map((vehicle, index) =>
 
                 <InfoComponent key={index} image={Vehicle} title="VEHICLE" value={vehicle.name} />

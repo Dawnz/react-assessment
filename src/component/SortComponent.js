@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function SortComponent({ content, fields, setSelected }) {
+export default function SortComponent({ fields, setSelected }) {
 
 
     const categoryHandler = (event) => {
