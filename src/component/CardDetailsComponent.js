@@ -10,6 +10,7 @@ import useFetch from "../services/useFetch"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { fetchURL } from "../utilities/fetchUrl"
+import { useLocation } from "react-router-dom"
 
 const CardDetailsDiv = styled.div`
 height: 480px;
@@ -100,7 +101,7 @@ background-color: white;
 
 `;
 
-export default function CardDetailsComponent({ cardInfo }) {
+export default function CardDetailsComponent() {
     //to get homeworld values
     // const [homeworldResponse, homeworldLoading, homeworldHasError] = useFetch(cardInfo ? cardInfo.homeworld : null);
     // const homeworld = homeworldResponse ? homeworldResponse.name : null;
@@ -109,8 +110,9 @@ export default function CardDetailsComponent({ cardInfo }) {
     // const species = speciesResponse ? speciesResponse.name : null;
     // console.log(homeworld);
     // console.log(cardInfo);
-
-
+    const location = useLocation()
+    const cardInfo = location.state.cardInfo
+    // console.log(location);
 
     // const allVehicles = cardInfo?.vehicles;
     // const vehicles = fetchURL(allVehicles);
@@ -128,12 +130,13 @@ export default function CardDetailsComponent({ cardInfo }) {
     // const [vehicleInfo, setVehicleInfo] = useState();
 
     useEffect(() => {
+        // console.log(props);
         async function getData() {
             const starships = await Promise.all(
                 cardInfo?.starships?.map(url => axios.get(url).then(res => res.data))
             )
                 .then((allResponses) => {
-                    console.log(allResponses);
+                    // console.log(allResponses);
                     return allResponses;
                 })
                 .catch((e) => {
@@ -144,7 +147,7 @@ export default function CardDetailsComponent({ cardInfo }) {
                 cardInfo?.vehicles?.map(url => axios.get(url).then(res => res.data))
             )
                 .then((allResponses) => {
-                    console.log(allResponses);
+                    // console.log(allResponses);
                     return allResponses;
                 })
                 .catch((e) => {

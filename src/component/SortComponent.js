@@ -1,11 +1,13 @@
 import { useState } from "react";
 
-export default function SortComponent({ fields, setSelected }) {
-
+export default function SortComponent({ setSelected }) {
+    const categories = ["Name", "Homeworld", "Species", "Vehicle Count", "Starship Count"]
 
     const categoryHandler = (event) => {
         // console.log(event.target.value);
-        setSelected(event.target.value);
+        event.target.value === "Vehicle Count" ? setSelected('vehicles') :
+            event.target.value === "Starship Count" ? setSelected('starships') :
+                setSelected(event.target.value.toLowerCase());
     };
     return (
         <select
@@ -13,7 +15,7 @@ export default function SortComponent({ fields, setSelected }) {
             onChange={categoryHandler}
         // value={selected || fields[0]}
         >
-            {fields?.map((category, index) => (
+            {categories.map((category, index) => (
                 <option key={index} value={category}>
                     {category}
                 </option>

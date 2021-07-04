@@ -31,12 +31,11 @@ label::before {
 } */
 `;
 
-export default function SearchComponent({ content, data, selected }) {
+export default function SearchComponent({ content, data, selected, searchTerm, setSearchTerm }) {
     // const [url, setUrl] = useState
     const url = "https://swapi.dev/api/people"
     const [searchResults, setSearchResults] = useState()
-    const [searchTerm, setSearchTerm] = useState('')
-    const storeData = data ? data : null
+    // const [searchTerm, setSearchTerm] = useState('')
     const handleChange = (event) => {
         setSearchTerm(event.target.value);
     };
@@ -56,15 +55,22 @@ export default function SearchComponent({ content, data, selected }) {
 
     // }, [searchTerm]);
     useEffect(() => {
-        console.log(storeData ? storeData : null);
+        // console.log(storeData ? storeData : null);
         // content("");
         // console.log(storeData ? storeData : null, data);
         // const alldata = { ...data || null }
         // console.log(alldata, [data]);
-        const results = data?.filter((cont) =>
-            cont["homeworld"]?.toLowerCase().includes(searchTerm)
-        );
+        const results = data?.filter((cont) => {
+            // console.log(selected);
+            if (selected === "vehicles" || selected === "starships") {
+                return cont[selected]["length"]?.toString()?.toLowerCase().includes(searchTerm)
+            }
+
+            else return cont[selected]?.toLowerCase().includes(searchTerm)
+
+        });
         // console.log(selected);
+        // console.log(results?.[0]?.["starships"]["length"]);
         content(results);
         // setSearchResults(results);
 

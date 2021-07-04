@@ -9,17 +9,22 @@ import { useCallback, useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import SearchComponent from "./component/SearchComponent";
 import SortComponent from "./component/SortComponent";
+import Header from "./component/Header";
+import Breadcrumbs from "./utilities/Breadcrumbs";
+import OrderComponent from "./component/OrderComponent";
 function App() {
   const url = 'https://swapi.dev/api/';
 
   const allCardsUrl = url + 'people'
   const allPlanetsUrl = url + 'planets'
   const allSpeciesUrl = url + 'species'
+  const categories = ["Homeworld", "Species", "Vehicle Count", "Starship Count"]
 
   const [results, setResults] = useState(null);
   const [masterData, setMasterData] = useState(null);
-  const [searchResults, setSearchResults] = useState([]);
-  const [selected, setSelected] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selected, setSelected] = useState("name");
+
 
 
   useEffect(() => {
@@ -45,6 +50,9 @@ function App() {
           setMasterData(prev => {
             return (prev ? [...prev, input] : [input])
           });
+          setResults(prev => {
+            return (prev ? [...prev, input] : [input])
+          });
           return { ...result, ...{ homeworld: homeworld, species: species } }
         })
       ).then()
@@ -59,32 +67,49 @@ function App() {
       }
     };
     getEntireUserList();
+    // setResults(masterData)
 
   }, [])
 
-  // console.log(masterData);
-  const [catData] = useFetch(url);
-  const categories = catData ? Object.keys(catData) : null
+  // console.log(selected);
+  // const testArray =[
+  //   { path: "/", name: "AllCards", Component: Header,SortComponent,SearchComponent,AllCardsComponent },
+  //   // { path: "/details/:nam", name: `${nam} Details`, Component: AllCardsComponent },
+  //   { path: "/pizza/:pizzaId", name: "Edit Pizza", Component: EditPizza },
+  //   {
+  //     path: "/pizza/:pizzaId/toppings",
+  //     name: "Pizza Toppings",
+  //     Component: Toppings
+  //   }
+  // ];
+  // 
   // console.log(results);
+  const value = "test"
   return (
-    <>
+    <div>
+      <Header></Header>
+      <Breadcrumbs></Breadcrumbs>
+      <Switch>
+        <Route exact from="/" render={props => [
+          <SearchComponent content={setMasterData} data={results} selected={selected} searchTerm={searchTerm} setSearchTerm={setSearchTerm}  {...props} key={1} />,
+          <SortComponent setSelected={setSelected} key={2} />,
+          <OrderComponent key={3} />,
+          <AllCardsComponent cardsData={masterData} key={4} {...props} />]
+        } />
+        {/* <Route from="/" render={props => 404} /> */}
+        <Route exact from="/:name Details" render={props => <CardDetailsComponent cardInfo={results?.[2]} {...props} />} />
 
-      {/* <Switch>
-        <Route exact from="/" render={props => <SearchComponent content={setResults} selected={selected} {...props} />} />
-        <Route exact from="/" render={props => <AllCardsComponent cardsData={results} {...props} />} />
-        <Route exact from="/Details" render={props => <CardDetailsComponent cardInfo={results?.[0]} {...props} />} />
-
-      </Switch> */}
-      {/* <SortComponent content={setResults} fields={categories} setSelected={setSelected}></SortComponent> */}
+      </Switch>
+      {/* <SortComponent setSelected={setSelected}></SortComponent> */}
       {/* <CardDetailsComponent cardInfo={masterData?.[2]} /> */}
-      {/* <SearchComponent content={setMasterData} data={masterData} selected={selected} /> */}
+      {/* <SearchComponent content={setMasterData} data={results} selected={selected} searchTerm={searchTerm} setSearchTerm={setSearchTerm} /> */}
       {/* <AllCardsComponent cardsData={masterData} /> */}
 
       {/* <CardComponent cardInfo={data}></CardComponent> */}
       <>
         {/* {loading ? <div>Loading...</div> : (hasError ? <div>Error occured.</div> : (response.map(data => <div>{data}</div>)))} */}
       </>
-    </>
+    </div>
   );
 }
 
