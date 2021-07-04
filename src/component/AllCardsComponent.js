@@ -5,7 +5,9 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 const AllCardsDiv = styled.div`
 display: grid;
-grid-auto-flow: column;
+/* grid-auto-flow: column; */
+grid-template-columns: repeat(5, 1fr);
+row-gap: 24px;
 
 `;
 export default function AllCardsComponent({ cardsData }) {

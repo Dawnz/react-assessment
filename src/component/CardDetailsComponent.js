@@ -17,6 +17,8 @@ width: 334;
 border-radius: 8px;
 margin: 0px 24px;
 align-self: stretch;
+background-color: white;
+
 /* border: 1px solid red; */
 
 .header{
@@ -67,9 +69,12 @@ align-self: stretch;
     grid-auto-flow: column;
     justify-content:space-between;
     margin-bottom: 16px;
+    /* border: 1px solid red; */
+    
 }
 .card-container{
    display: grid;
+   padding: 0 16px;
     /* justify-content: center; */
 }
  .inner-species{
@@ -168,7 +173,7 @@ export default function CardDetailsComponent({ cardInfo }) {
                     }
                     <h3 className="heading-content gender-info">{cardInfo?.birth_year}</h3>
                 </div>
-                <h3 className="heading-content">{cardInfo ? cardInfo.species ? cardInfo.species : `Human` : null}</h3></div>
+                <h3 className="heading-content">{cardInfo?.species}</h3></div>
             {/* underline   */}
 
             <InfoComponent image={HomeWorld} title="HOMEWORLD" value={cardInfo?.homeworld || null} />

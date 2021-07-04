@@ -16,11 +16,7 @@ function App() {
   const allPlanetsUrl = url + 'planets'
   const allSpeciesUrl = url + 'species'
 
-
   const [results, setResults] = useState(null);
-  // const [planets, setPlanets] = useState(null);
-  // const [species, setSpecies] = useState(null);
-
   const [masterData, setMasterData] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
   const [selected, setSelected] = useState(null);
@@ -31,9 +27,7 @@ function App() {
       const actualUrl = allCardsUrl + `?page=${pageNo}`;
       const apiResults = await axios.get(actualUrl)
         .then(resp => {
-
           return resp.data
-
         })
         ;
       return apiResults;
@@ -45,63 +39,32 @@ function App() {
         mod.results?.map(async result => {
           const homeworld = await axios.get(result.homeworld).then(res => res.data.name);
           const species = await axios.get(result.species).then(res => res.data.name);
-          const input = ({ ...result, ...{ homeworld: homeworld, species: species } });
+
+          const input = ({ ...result, ...{ homeworld: homeworld, species: species || 'Human' } });
           // console.log(input);
           setMasterData(prev => {
-
-            // console.log(responseData, allResponses);
             return (prev ? [...prev, input] : [input])
           });
           return { ...result, ...{ homeworld: homeworld, species: species } }
         })
-      ).then((allResponses) => {
-
-        // console.log(allResponses);
-      })
+      ).then()
       return mod
     }
-
     const getEntireUserList = async function (pageNo = 1) {
       const res = await modifyList(pageNo);
-      // console.log(res?.results?.[0]?.homeworld);
-      const [...value] = res.results.flat()
-      // const [...newvalue] = value.map(async result => {
-      //   const homeworld = await axios.get(result.homeworld).then(res => res.data.name);
-      //   const species = await axios.get(result.species).then(res => res.data.name);
-      //   return { result, ...{ homeworld: homeworld, species: species } }
-      // })
-
-
-
-      // console.log(newvalue);
-      // console.log("Retreiving data from API for page : " + pageNo);
       if (res.next !== null) {
-        // setResults(prev => {
-        //   return prev ? [...prev, ...value] : [...value]
-        // })
-        // console.log(results.next);
-        // console.log(results);
         return res + await getEntireUserList(pageNo + 1);
       } else {
-        // setResults(prev => {
-        //   return prev ? [...prev, ...value] : [...value];
-        // })
-        // console.log(results);
         return res;
       }
-
     };
     getEntireUserList();
 
   }, [])
 
-  console.log(masterData);
-
-
-
+  // console.log(masterData);
   const [catData] = useFetch(url);
   const categories = catData ? Object.keys(catData) : null
-
   // console.log(results);
   return (
     <>
@@ -113,9 +76,9 @@ function App() {
 
       </Switch> */}
       {/* <SortComponent content={setResults} fields={categories} setSelected={setSelected}></SortComponent> */}
-      {/* <CardDetailsComponent cardInfo={results } /> */}
-      {/* <SearchComponent content={setResults} selected={selected} /> */}
-      <AllCardsComponent cardsData={masterData} />
+      {/* <CardDetailsComponent cardInfo={masterData?.[2]} /> */}
+      {/* <SearchComponent content={setMasterData} data={masterData} selected={selected} /> */}
+      {/* <AllCardsComponent cardsData={masterData} /> */}
 
       {/* <CardComponent cardInfo={data}></CardComponent> */}
       <>

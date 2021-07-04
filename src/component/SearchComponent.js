@@ -31,30 +31,47 @@ label::before {
 } */
 `;
 
-export default function SearchComponent({ content, selected }) {
+export default function SearchComponent({ content, data, selected }) {
     // const [url, setUrl] = useState
     const url = "https://swapi.dev/api/people"
     const [searchResults, setSearchResults] = useState()
     const [searchTerm, setSearchTerm] = useState('')
-
+    const storeData = data ? data : null
     const handleChange = (event) => {
         setSearchTerm(event.target.value);
     };
 
-    useEffect(() => {
-        const getSearch = async function () {
-            const results = await axios.get(url, { params: { search: searchTerm } })
-                .then((res) => res.data)
-                .then((res) => {
-                    return res
-                    // console.log(res);
+    // useEffect(() => {
+    //     const getSearch = async function () {
+    //         const results = await axios.get(url, { params: { search: searchTerm } })
+    //             .then((res) => res.data)
+    //             .then((res) => {
+    //                 return res
+    //                 // console.log(res);
 
-                })
-            content(results?.results);
-        }
-        getSearch()
+    //             })
+    //         setSearchResults(results?.results);
+    //     }
+    //     getSearch()
+
+    // }, [searchTerm]);
+    useEffect(() => {
+        console.log(storeData ? storeData : null);
+        // content("");
+        // console.log(storeData ? storeData : null, data);
+        // const alldata = { ...data || null }
+        // console.log(alldata, [data]);
+        const results = data?.filter((cont) =>
+            cont["homeworld"]?.toLowerCase().includes(searchTerm)
+        );
+        // console.log(selected);
+        content(results);
+        // setSearchResults(results);
+
 
     }, [searchTerm]);
+
+
     // console.log(searchResults);
     return (
         <SearchDiv>

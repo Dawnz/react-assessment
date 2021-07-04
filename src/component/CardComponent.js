@@ -13,6 +13,7 @@ width: 216px;
 border-radius: 8px;
 margin: 0px 24px;
 align-self: stretch;
+background-color: white;
 /* border: 1px solid red; */
 
 .header{
@@ -27,6 +28,7 @@ align-self: stretch;
     position: absolute;
     line-height: 24px;
     height: 24px;
+    font-size: 24px;
     /* width: 64px; */
     top: 64px;
     left: 16px;
@@ -119,7 +121,7 @@ export default function CardComponent({ cardInfo }) {
                         }
                         <h3 className="heading-content gender-info">{cardInfo?.birth_year}</h3>
                     </div>
-                    <h3 className="heading-content">{cardInfo?.species?.length > 0 ? cardInfo?.species : "Human" || null}</h3></div>
+                    <h3 className="heading-content">{cardInfo?.species}</h3></div>
                 {/* underline   */}
 
                 <InfoComponent image={HomeWorld} title="HOMEWORLD" value={cardInfo?.homeworld || null} />
