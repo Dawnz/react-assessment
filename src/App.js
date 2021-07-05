@@ -12,18 +12,17 @@ import SortComponent from "./component/SortComponent";
 import Header from "./component/Header";
 import Breadcrumbs from "./utilities/Breadcrumbs";
 import OrderComponent from "./component/OrderComponent";
+import AllSearchComponent from "./component/AllSearchComponents";
 function App() {
   const url = 'https://swapi.dev/api/';
 
   const allCardsUrl = url + 'people'
-  const allPlanetsUrl = url + 'planets'
-  const allSpeciesUrl = url + 'species'
-  const categories = ["Homeworld", "Species", "Vehicle Count", "Starship Count"]
 
   const [results, setResults] = useState(null);
   const [masterData, setMasterData] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selected, setSelected] = useState("name");
+  const [selectedSort, setSelectedSort] = useState("name");
+  const [selectedOrder, setSelectedOrder] = useState('ASC')
 
 
 
@@ -67,48 +66,24 @@ function App() {
       }
     };
     getEntireUserList();
-    // setResults(masterData)
 
   }, [])
 
-  // console.log(selected);
-  // const testArray =[
-  //   { path: "/", name: "AllCards", Component: Header,SortComponent,SearchComponent,AllCardsComponent },
-  //   // { path: "/details/:nam", name: `${nam} Details`, Component: AllCardsComponent },
-  //   { path: "/pizza/:pizzaId", name: "Edit Pizza", Component: EditPizza },
-  //   {
-  //     path: "/pizza/:pizzaId/toppings",
-  //     name: "Pizza Toppings",
-  //     Component: Toppings
-  //   }
-  // ];
-  // 
-  // console.log(results);
-  const value = "test"
+
   return (
     <div>
       <Header></Header>
       <Breadcrumbs></Breadcrumbs>
       <Switch>
-        <Route exact from="/" render={props => [
-          <SearchComponent content={setMasterData} data={results} selected={selected} searchTerm={searchTerm} setSearchTerm={setSearchTerm}  {...props} key={1} />,
-          <SortComponent setSelected={setSelected} key={2} />,
-          <OrderComponent key={3} />,
-          <AllCardsComponent cardsData={masterData} key={4} {...props} />]
+        <Route exact from="/" render={props =>
+          <AllSearchComponent setMasterData={setMasterData} results={results} selectedSort={selectedSort}
+            setSelectedSort={setSelectedSort} searchTerm={searchTerm} setSearchTerm={setSearchTerm}
+            masterData={masterData} selectedOrder={selectedOrder} setSelectedOrder={setSelectedOrder} {...props} />
         } />
-        {/* <Route from="/" render={props => 404} /> */}
-        <Route exact from="/:name Details" render={props => <CardDetailsComponent cardInfo={results?.[2]} {...props} />} />
+        {/* <Route from="/" render={()=>404} /> */}
+        <Route exact from="/:name Details" render={props => <CardDetailsComponent {...props} />} />
 
       </Switch>
-      {/* <SortComponent setSelected={setSelected}></SortComponent> */}
-      {/* <CardDetailsComponent cardInfo={masterData?.[2]} /> */}
-      {/* <SearchComponent content={setMasterData} data={results} selected={selected} searchTerm={searchTerm} setSearchTerm={setSearchTerm} /> */}
-      {/* <AllCardsComponent cardsData={masterData} /> */}
-
-      {/* <CardComponent cardInfo={data}></CardComponent> */}
-      <>
-        {/* {loading ? <div>Loading...</div> : (hasError ? <div>Error occured.</div> : (response.map(data => <div>{data}</div>)))} */}
-      </>
     </div>
   );
 }

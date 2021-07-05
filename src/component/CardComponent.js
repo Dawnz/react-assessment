@@ -11,7 +11,8 @@ const CardDiv = styled.div`
 height: 282px;
 width: 216px;
 border-radius: 8px;
-margin: 0px 24px;
+gap: 24px;
+/* margin: 0px 24px; */
 align-self: stretch;
 background-color: white;
 /* border: 1px solid red; */

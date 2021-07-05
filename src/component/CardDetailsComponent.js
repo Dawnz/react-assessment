@@ -18,8 +18,9 @@ width: 334;
 border-radius: 8px;
 margin: 0px 24px;
 align-self: stretch;
-background-color: white;
-
+/* background-color: white; */
+margin-top: 24px;
+padding: 0 15px 0 105px;
 /* border: 1px solid red; */
 
 .header{
@@ -76,7 +77,9 @@ background-color: white;
 .card-container{
    display: grid;
    padding: 0 16px;
-    /* justify-content: center; */
+   background-color: white;
+   height: 382px;
+    align-content: flex-start;
 }
  .inner-species{
     display: flex;

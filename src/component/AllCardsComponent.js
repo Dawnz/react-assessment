@@ -8,7 +8,8 @@ const AllCardsDiv = styled.div`
 display: grid;
 /* grid-auto-flow: column; */
 grid-template-columns: repeat(5, 1fr);
-row-gap: 24px;
+gap: 24px;
+
 `;
 
 const StyledLink = styled(Link)`
