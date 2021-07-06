@@ -14,13 +14,14 @@ import { useLocation } from "react-router-dom"
 
 const CardDetailsDiv = styled.div`
 height: 480px;
-width: 334;
+/* width: 334; */
 border-radius: 8px;
-margin: 0px 24px;
+/* margin: 0px 24px; */
 align-self: stretch;
+padding: 0 132px;
 /* background-color: white; */
 margin-top: 24px;
-padding: 0 15px 0 105px;
+/* padding: 0 15px 0 105px; */
 /* border: 1px solid red; */
 
 .header{

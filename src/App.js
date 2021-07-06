@@ -71,7 +71,7 @@ function App() {
 
 
   return (
-    <div>
+    <>
       <Header></Header>
       <Breadcrumbs></Breadcrumbs>
       <Switch>
@@ -84,7 +84,7 @@ function App() {
         <Route exact from="/:name Details" render={props => <CardDetailsComponent {...props} />} />
 
       </Switch>
-    </div>
+    </>
   );
 }
 

@@ -5,11 +5,13 @@ import useFetch from '../services/useFetch';
 
 const SearchDiv = styled.div`
 /* height: 32px; */
+/* border: 1px solid red; */
+/* width: 100%; */
 .input-field{
     margin:0;
     padding:0;
     height: 32px;
-    width: 847px;
+    width: 100%;
     left: 0px;
     top: 0px;
     border-radius: 4px;

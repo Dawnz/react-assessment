@@ -3,24 +3,44 @@ import Card from "../Interview Assets/Card.svg"
 import Deck from "../Interview Assets/Deck.svg"
 
 const HeaderDiv = styled.div`
-display: grid;
-grid-auto-flow: column;
+/* display: grid; */
+/* grid-auto-flow: column; */
+/* width: 100%; */
+margin-top: 68px;
 /* align-content: space-between; */
-align-items: center;
-justify-content: space-between;
+/* align-items: center; */
+
 /* justify-items: center; */
 /* padding: 0 132px; */
-margin-left: 132px;
+/* margin-left: 132px; */
 /* border: 1px solid black; */
-border-bottom: 2px solid  #B8B8B8;
-margin-bottom: 48px;
-width:1176px;
 
+margin-bottom: 48px;
+
+.head-container{
+    display: grid;
+grid-auto-flow: column;
+justify-content: space-between;
+padding: 0 132px;
+border-bottom: 2px solid  #B8B8B8;
+
+@media (max-width: 700px)
+{
+    .header-title{
+        display: none;
+    }
+}
+/* width:100%; */
+    /* margin: 0 132px; */
+    /* width: 100%; */
+    /* align-self: center;  */
+
+}
 /* align-content: space-between; */
-/* width: 100%; */
 
 .deck-buttons{
     /* border: 1px solid blue; */
+    
     margin:0;
 }
 
@@ -74,35 +94,41 @@ width:1176px;
     
     margin:0;
     border: 1px solid #B8B8B8;
-    height: 27px;
-    padding: 0 24px 24px 24px;
+    /* height: 27px; */
+    padding: 8px;
     margin-top:0;
     border-radius: 4px;
-    /* line-height: 14px; */
-    margin-top:30px;
+    line-height: 14px;
+    /* margin-top:30px; */
     margin-bottom:10px;
+    margin-right: 24px;
+}
+.user-name{
+    margin:0;
+    padding: 0;
 }
 `;
 export default function Header() {
-    return <HeaderDiv>
-        <div className="deck-buttons">
-            <div className="deck-button all-cards-wrapper">
-                <img src={Card} alt="card" className="deck-image"></img>
-                <button className="btn all-cards">All  Cards</button>
+    return <HeaderDiv >
+        <div className="head-container">
+            <div className="deck-buttons">
+                <div className="deck-button all-cards-wrapper">
+                    <img src={Card} alt="card" className="deck-image"></img>
+                    <button className="btn all-cards">All  Cards</button>
+                </div>
+                <div className="deck-button decks-wrapper">
+                    <img src={Deck} alt="card"></img>
+                    <button className="btn decks">Decks</button>
+                </div>
+
             </div>
-            <div className="deck-button decks-wrapper">
-                <img src={Deck} alt="card"></img>
-                <button className="btn decks">Decks</button>
+            <div className="header-title">
+                <h1 className="title">SW-API Deck Builder</h1>
             </div>
 
+            <div className="user-display">
+                <p className="user-name">Damian Green</p>
+            </div>
         </div>
-        <div className="header-title">
-            <h1 className="title">SW-API Deck Builder</h1>
-        </div>
-
-        <div className="user-display">
-            <p className="user-name">Damian Green</p>
-        </div>
-
     </HeaderDiv>
 }

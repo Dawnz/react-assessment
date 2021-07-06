@@ -7,8 +7,15 @@ import { Link } from "react-router-dom";
 const AllCardsDiv = styled.div`
 display: grid;
 /* grid-auto-flow: column; */
-grid-template-columns: repeat(5, 1fr);
+grid-template-columns: repeat(auto-fit, minmax(216px,1fr));
 gap: 24px;
+width: 100%;
+
+@media (max-width: 500px)
+{
+    /* display: grid; */
+    grid-template-columns: 1fr;
+}
 
 `;
 

@@ -3,9 +3,11 @@ import styled from "styled-components";
 
 
 const SortDiv = styled.div`
+width: 100%;
+/* border: 1px solid blue; */
 .category-select{
     height: 32px;
-width: 139px;
+/* width: 139px; */
 border-radius: 6px;
 border-color: #B8B8B8;
 /* background-color: black; */

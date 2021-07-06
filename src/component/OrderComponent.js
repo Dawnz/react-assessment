@@ -2,10 +2,10 @@ import styled from "styled-components"
 
 const OrderDiv = styled.div`
  /* background-color: white; */
-
+ width: 111px;
  .button {
     height: 32px;
-width: 60px;
+
 padding: 8px, 10px, 8px, 10px;
 border: 1px solid B8B8B8;
 

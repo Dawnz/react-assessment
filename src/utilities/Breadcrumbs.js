@@ -13,7 +13,7 @@ const Breadcrumbs = (props) => {
     } = props;
     const pathnames = pathname.split("/").filter((x) => x);
     return (
-        <MUIBreadcrumbs separator=">" aria-label="breadcrumb" style={{ marginLeft: '132px' }}>
+        <MUIBreadcrumbs separator=">" aria-label="breadcrumb" style={{ marginLeft: '132px', }}>
             {pathnames.length > 0 ? (
                 <Link onClick={() => history.push("/")}>AllCards</Link>
             ) : (
