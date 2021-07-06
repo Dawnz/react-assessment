@@ -56,7 +56,7 @@ export default function SearchComponent({ content, setMasterData, selectedSort, 
             }
 
             else return cont[selectedSort]?.toLowerCase().includes(searchTerm)
-        });
+        }).sort((a, b) => a["name"] > b["name"] ? 1 : -1);
         setMasterData(results);
 
     }, [searchTerm]);

@@ -63,7 +63,7 @@ export default function AllSearchComponent({ setMasterData, results, selectedSor
 
         </div>
         <div className="component cards">
-            <AllCardsComponent cardsData={masterData} />
+            <AllCardsComponent cardsData={masterData} selectedOrder={selectedOrder} />
         </div>
 
     </ContainerDiv>

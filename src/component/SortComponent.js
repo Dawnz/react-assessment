@@ -19,14 +19,14 @@ border-color: #B8B8B8;
 
 `;
 
-export default function SortComponent({ setSelected }) {
+export default function SortComponent({ setSelectedSort }) {
     const categories = ["Name", "Homeworld", "Species", "Vehicle Count", "Starship Count"]
 
     const categoryHandler = (event) => {
         // console.log(event.target.value);
-        event.target.value === "Vehicle Count" ? setSelected('vehicles') :
-            event.target.value === "Starship Count" ? setSelected('starships') :
-                setSelected(event.target.value.toLowerCase());
+        event.target.value === "Vehicle Count" ? setSelectedSort('vehicles') :
+            event.target.value === "Starship Count" ? setSelectedSort('starships') :
+                setSelectedSort(event.target.value.toLowerCase());
     };
     return <SortDiv>
         <select

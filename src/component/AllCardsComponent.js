@@ -19,11 +19,15 @@ text-decoration: none;
     text-decoration: none;
 }
 `;
-export default function AllCardsComponent({ cardsData }) {
+export default function AllCardsComponent({ cardsData, selectedOrder }) {
     return (
         <AllCardsDiv>
             {
-                cardsData?.map((result, index) =>
+                cardsData?.sort(selectedOrder === "ASC" ?
+                    ((a, b) => a["name"] > b["name"] ? 1 : -1) :
+                    ((a, b) => b["name"] > a["name"] ? 1 : -1)
+
+                ).map((result, index) =>
                     // console.log(cardsData + `people/${index + 1}`)
                     <Link to={{ pathname: `${result.name} details`, state: { cardInfo: result } }} key={index} style={{ textDecoration: 'none', color: 'black' }}>
                         <CardComponent key={index} cardInfo={result}></CardComponent>
